@@ -1,85 +1,145 @@
 .App {
-  max-width: 600px;
+  max-width: 700px;
   margin: 0 auto;
   padding: 20px;
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
 }
 
 .todo-container {
   background: white;
-  border-radius: 10px;
-  padding: 30px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  border-radius: 15px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  margin-top: 20px;
 }
 
 h1 {
   text-align: center;
   color: #333;
+  margin-bottom: 10px;
+  font-size: 2.5em;
+  font-weight: 300;
+}
+
+.subtitle {
+  text-align: center;
+  color: #666;
   margin-bottom: 30px;
+  font-style: italic;
 }
 
 .input-section {
   display: flex;
-  gap: 10px;
+  gap: 15px;
   margin-bottom: 30px;
 }
 
 .task-input {
   flex: 1;
-  padding: 12px;
+  padding: 15px;
   border: 2px solid #ddd;
-  border-radius: 5px;
+  border-radius: 8px;
   font-size: 16px;
+  transition: border-color 0.3s;
 }
 
 .task-input:focus {
   outline: none;
-  border-color: #4CAF50;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
 .add-button {
-  padding: 12px 20px;
-  background: #4CAF50;
+  padding: 15px 25px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
+  font-weight: 600;
+  transition: transform 0.2s;
 }
 
 .add-button:hover {
-  background: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.bulk-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.bulk-button {
+  padding: 10px 20px;
+  border: 2px solid #667eea;
+  background: white;
+  color: #667eea;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.bulk-button:hover {
+  background: #667eea;
+  color: white;
+}
+
+.clear-button {
+  border-color: #f44336;
+  color: #f44336;
+}
+
+.clear-button:hover {
+  background: #f44336;
+  color: white;
 }
 
 .task-list {
-  min-height: 200px;
+  min-height: 300px;
+  max-height: 500px;
+  overflow-y: auto;
 }
 
 .task-item {
   display: flex;
   align-items: center;
   gap: 15px;
-  padding: 15px;
+  padding: 18px;
   border: 1px solid #eee;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  background: #f9f9f9;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  background: #fafafa;
+  transition: all 0.3s;
+}
+
+.task-item:hover {
+  background: #f0f0f0;
+  transform: translateX(5px);
 }
 
 .task-item.completed {
-  background: #f0f0f0;
-  opacity: 0.7;
+  background: #e8f5e8;
+  border-color: #c8e6c9;
 }
 
 .task-checkbox {
   width: 20px;
   height: 20px;
   cursor: pointer;
+  accent-color: #667eea;
 }
 
 .task-text {
   flex: 1;
   font-size: 16px;
+  line-height: 1.4;
 }
 
 .task-item.completed .task-text {
@@ -92,24 +152,80 @@ h1 {
   background: #f44336;
   color: white;
   border: none;
-  border-radius: 3px;
+  border-radius: 5px;
   cursor: pointer;
+  font-size: 12px;
+  transition: all 0.3s;
 }
 
 .delete-button:hover {
   background: #da190b;
+  transform: scale(1.05);
 }
 
 .no-tasks {
   text-align: center;
   color: #888;
   font-style: italic;
-  padding: 40px;
+  padding: 60px 20px;
+  font-size: 18px;
 }
 
 .task-counter {
   text-align: center;
+  margin: 30px 0 20px 0;
+  font-size: 18px;
+  color: #667eea;
+}
+
+.task-breakdown {
+  display: flex;
+  justify-content: space-around;
+  background: #f8f9fa;
+  border-radius: 10px;
+  padding: 20px;
   margin-top: 20px;
+}
+
+.breakdown-item {
+  text-align: center;
+}
+
+.breakdown-label {
+  display: block;
   color: #666;
   font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.breakdown-count {
+  display: block;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .App {
+    padding: 10px;
+  }
+  
+  .todo-container {
+    padding: 20px;
+  }
+  
+  .input-section {
+    flex-direction: column;
+  }
+  
+  .bulk-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .task-breakdown {
+    flex-direction: column;
+    gap: 15px;
+  }
 }

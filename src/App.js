@@ -2,8 +2,26 @@ import React, { useState } from 'react';
 import './App.css';
 
 function App() {
-  // STATE: Store our data
-  const [tasks, setTasks] = useState([]);
+  // STATE: Store our data with sample tasks pre-loaded
+  const [tasks, setTasks] = useState([
+    // Personal Tasks
+    { id: 1, text: "Buy groceries", completed: false },
+    { id: 2, text: "Call mom", completed: true },
+    { id: 3, text: "Exercise for 30 minutes", completed: false },
+    { id: 4, text: "Read a book chapter", completed: false },
+    
+    // Work/Study Tasks
+    { id: 5, text: "Finish React tutorial", completed: false },
+    { id: 6, text: "Review meeting notes", completed: true },
+    { id: 7, text: "Send email to team", completed: false },
+    { id: 8, text: "Practice coding problems", completed: false },
+    
+    // Fun Tasks
+    { id: 9, text: "Watch a movie", completed: true },
+    { id: 10, text: "Try new recipe", completed: false },
+    { id: 11, text: "Walk in the park", completed: false }
+  ]);
+  
   const [inputValue, setInputValue] = useState('');
 
   // FUNCTION: Add new task
@@ -38,10 +56,21 @@ function App() {
     }
   };
 
+  // FUNCTION: Clear all completed tasks
+  const clearCompleted = () => {
+    setTasks(tasks.filter(task => !task.completed));
+  };
+
+  // FUNCTION: Mark all tasks as complete
+  const markAllComplete = () => {
+    setTasks(tasks.map(task => ({ ...task, completed: true })));
+  };
+
   return (
     <div className="App">
       <div className="todo-container">
         <h1>My Todo List</h1>
+        <p className="subtitle">Sample tasks loaded - try checking, adding, and deleting!</p>
         
         {/* INPUT SECTION */}
         <div className="input-section">
@@ -57,6 +86,18 @@ function App() {
             Add
           </button>
         </div>
+
+        {/* BULK ACTIONS */}
+        {tasks.length > 0 && (
+          <div className="bulk-actions">
+            <button onClick={markAllComplete} className="bulk-button">
+              Mark All Complete
+            </button>
+            <button onClick={clearCompleted} className="bulk-button clear-button">
+              Clear Completed
+            </button>
+          </div>
+        )}
 
         {/* TASK LIST */}
         <div className="task-list">
@@ -83,7 +124,25 @@ function App() {
         {/* TASK COUNTER */}
         {tasks.length > 0 && (
           <div className="task-counter">
-            {tasks.filter(task => !task.completed).length} of {tasks.length} tasks remaining
+            <strong>{tasks.filter(task => !task.completed).length}</strong> of <strong>{tasks.length}</strong> tasks remaining
+          </div>
+        )}
+
+        {/* TASK BREAKDOWN */}
+        {tasks.length > 0 && (
+          <div className="task-breakdown">
+            <div className="breakdown-item">
+              <span className="breakdown-label">Completed:</span>
+              <span className="breakdown-count">{tasks.filter(task => task.completed).length}</span>
+            </div>
+            <div className="breakdown-item">
+              <span className="breakdown-label">Remaining:</span>
+              <span className="breakdown-count">{tasks.filter(task => !task.completed).length}</span>
+            </div>
+            <div className="breakdown-item">
+              <span className="breakdown-label">Total:</span>
+              <span className="breakdown-count">{tasks.length}</span>
+            </div>
           </div>
         )}
       </div>
